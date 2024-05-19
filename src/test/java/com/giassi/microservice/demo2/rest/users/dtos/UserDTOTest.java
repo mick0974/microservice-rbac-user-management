@@ -13,7 +13,7 @@ public class UserDTOTest {
     @Test
     public void userDTOTestConstructor1() {
         User user = new User();
-        user.setId(1L);
+        user.setUserId(1L);
         user.setUsername("testUsername");
         user.setName("testName");
         user.setSurname("testSurname");
@@ -47,7 +47,7 @@ public class UserDTOTest {
 
         UserDTO userDTO = new UserDTO(user);
 
-        assertEquals(userDTO.getId(), user.getId());
+        assertEquals(userDTO.getUserId(), user.getUserId());
         assertEquals(userDTO.getUsername(), user.getUsername());
         assertEquals(userDTO.getName(), user.getName());
         assertEquals(userDTO.getSurname(), user.getSurname());
@@ -85,7 +85,7 @@ public class UserDTOTest {
     public void userDTOTestConstructor2() {
         // test enabled and disabled permissions
         User user = new User();
-        user.setId(1L);
+        user.setUserId(1L);
         user.setUsername("testUsername");
         user.setName("testName");
         user.setSurname("testSurname");
@@ -131,7 +131,7 @@ public class UserDTOTest {
 
         UserDTO userDTO = new UserDTO(user);
 
-        assertEquals(userDTO.getId(), user.getId());
+        assertEquals(userDTO.getUserId(), user.getUserId());
         assertEquals(userDTO.getUsername(), user.getUsername());
         assertEquals(userDTO.getName(), user.getName());
         assertEquals(userDTO.getSurname(), user.getSurname());

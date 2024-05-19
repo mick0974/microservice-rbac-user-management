@@ -12,21 +12,21 @@ import java.util.List;
 @Data
 public class RoleDTO implements Serializable {
 
-    private Long id;
+    private Long roleId;
     private String role;
 
     private List<PermissionDTO> permissions = new ArrayList<>();
 
     public RoleDTO(Role role) {
-        this.id = role.getId();
+        this.roleId = role.getRoleId();
         this.role = role.getRole();
 
         // permissions
         role.getPermissions().stream().forEach(e -> permissions.add(new PermissionDTO(e)));
     }
 
-    public RoleDTO(Long id, String role) {
-        this.id = id;
+    public RoleDTO(Long roleId, String role) {
+        this.roleId = roleId;
         this.role = role;
     }
 
@@ -34,7 +34,7 @@ public class RoleDTO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof RoleDTO)) return false;
-        return id != null && id.equals(((RoleDTO) o).getId());
+        return roleId != null && roleId.equals(((RoleDTO) o).getRoleId());
     }
 
     @Override

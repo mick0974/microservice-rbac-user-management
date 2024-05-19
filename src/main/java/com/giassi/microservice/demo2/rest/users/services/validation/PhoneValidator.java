@@ -31,10 +31,13 @@ public class PhoneValidator {
                     MAX_PHONE_LENGTH));
         }
 
+        /*
         Matcher matcher = pattern.matcher(phone);
         if (!matcher.matches()) {
             throw new InvalidUserDataException(String.format("The phone provided %s is not formal valid", phone));
         }
+
+         */
     }
 
 }

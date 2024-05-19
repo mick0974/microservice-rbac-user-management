@@ -16,7 +16,7 @@ public class UserTestHelper {
     // create a test user data
     public static User getUserTestData(Long id, String username, String name, String surname, String email, String phone) {
         User user = new User();
-        user.setId(id);
+        user.setUserId(id);
 
         user.setUsername(username);
         user.setPassword(EncryptionService.encrypt(TEST_PASSWORD_DECRYPTED, EncryptionService.DEFAULT_SALT));

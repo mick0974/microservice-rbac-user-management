@@ -127,7 +127,7 @@ public class UserService {
 
         userCreated = userRepository.save(userCreated);
 
-        log.info(String.format("User %s has been created.", userCreated.getId()));
+        log.info(String.format("User %s has been created.", userCreated.getUserId()));
         return userCreated;
     }
 
@@ -136,7 +136,7 @@ public class UserService {
         User userByUsername = getUserByUsername(username);
             if (userByUsername != null) {
                 String msg = String.format("The username %s it's already in use from another user with ID = %s",
-                        userByUsername.getUsername(), userByUsername.getId());
+                        userByUsername.getUsername(), userByUsername.getUserId());
                 log.error(msg);
             throw new InvalidUserDataException(msg);
         }
@@ -147,7 +147,7 @@ public class UserService {
         User userByEmail = getUserByEmail(email);
         if (userByEmail != null) {
             String msg = String.format("The email %s it's already in use from another user with ID = %s",
-                    userByEmail.getContact().getEmail(), userByEmail.getId());
+                    userByEmail.getContact().getEmail(), userByEmail.getUserId());
             log.error(msg);
             throw new InvalidUserDataException(String.format("This email %s it's already in use.",
                     userByEmail.getContact().getEmail()));
@@ -216,7 +216,7 @@ public class UserService {
 
         userCreated = userRepository.save(userCreated);
 
-        log.info(String.format("User %s has been created.", userCreated.getId()));
+        log.info(String.format("User %s has been created.", userCreated.getUserId()));
         return userCreated;
     }
 
@@ -224,14 +224,14 @@ public class UserService {
         contact.setUser(user);
         user.setContact(contact);
 
-        log.debug(String.format("Contact information set on User %s .", user.getId()));
+        log.debug(String.format("Contact information set on User %s .", user.getUserId()));
     }
 
     public void addAddressOnUser(User user, Address address) {
         address.setUser(user);
         user.setAddress(address);
 
-        log.debug(String.format("Address information set on User %s .", user.getId()));
+        log.debug(String.format("Address information set on User %s .", user.getUserId()));
     }
 
     public void addUserRole(User user, long roleId) {
@@ -261,9 +261,9 @@ public class UserService {
         User userByUsername = getUserByUsername(updateUserDTO.getUsername());
         if (userByUsername != null) {
             // check if the user's id is different than the actual user
-            if (!user.getId().equals(userByUsername.getId())) {
+            if (!user.getUserId().equals(userByUsername.getUserId())) {
                 String msg = String.format("The username %s it's already in use from another user with ID = %s",
-                        updateUserDTO.getUsername(), userByUsername.getId());
+                        updateUserDTO.getUsername(), userByUsername.getUserId());
                 log.error(msg);
                 throw new InvalidUserDataException(msg);
             }
@@ -277,9 +277,9 @@ public class UserService {
         User userEmail = getUserByEmail(updateUserDTO.getEmail());
         if (userEmail != null) {
             // check if the user's email is different than the actual user
-            if (!user.getId().equals(userEmail.getId())) {
+            if (!user.getUserId().equals(userEmail.getUserId())) {
                 String msg = String.format("The email %s it's already in use from another user with ID = %s",
-                        updateUserDTO.getEmail(), userEmail.getId());
+                        updateUserDTO.getEmail(), userEmail.getUserId());
                 log.error(msg);
                 throw new InvalidUserDataException(msg);
             }
@@ -329,7 +329,7 @@ public class UserService {
         addAddressOnUser(user, address);
 
         User userUpdated = userRepository.save(user);
-        log.info(String.format("User %s has been updated.", user.getId()));
+        log.info(String.format("User %s has been updated.", user.getUserId()));
 
         return userUpdated;
     }
@@ -415,7 +415,7 @@ public class UserService {
         user.setUpdatedDt(LocalDateTime.now());
 
         userRepository.save(user);
-        log.info(String.format("Added role %s on user id = %s", role.getRole(), user.getId()));
+        log.info(String.format("Added role %s on user id = %s", role.getRole(), user.getUserId()));
 
         return user;
     }
@@ -441,7 +441,7 @@ public class UserService {
         user.setUpdatedDt(LocalDateTime.now());
 
         userRepository.save(user);
-        log.info(String.format("Removed role %s on user id = %s", role.getRole(), user.getId()));
+        log.info(String.format("Removed role %s on user id = %s", role.getRole(), user.getUserId()));
 
         return user;
     }

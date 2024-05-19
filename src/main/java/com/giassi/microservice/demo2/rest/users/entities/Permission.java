@@ -14,9 +14,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Permission {
 
-    public Permission(Long id, String permission) {
+    public Permission(Long id, String permissionKey) {
         this.id = id;
-        this.permission = permission;
+        this.permissionKey = permissionKey;
     }
 
     @Id
@@ -26,7 +26,7 @@ public class Permission {
     private Long id;
 
     @Column(name="permission", nullable = false)
-    private String permission;
+    private String permissionKey;
 
     // enabled as default
     @Column(name="enabled")

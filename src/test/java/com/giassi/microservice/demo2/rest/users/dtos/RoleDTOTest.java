@@ -13,7 +13,7 @@ public class RoleDTOTest {
 
         RoleDTO roleDTO = new RoleDTO(role);
 
-        assertEquals(role.getId(), roleDTO.getId());
+        assertEquals(role.getRoleId(), roleDTO.getRoleId());
         assertEquals(role.getRole(), roleDTO.getRole());
     }
 
@@ -21,7 +21,7 @@ public class RoleDTOTest {
     public void testRoleDTOConstructor2() {
         RoleDTO roleDTO = new RoleDTO(1L, "USER");
 
-        assertEquals(Long.valueOf(1L), roleDTO.getId());
+        assertEquals(Long.valueOf(1L), roleDTO.getRoleId());
         assertEquals("USER", roleDTO.getRole());
     }
 

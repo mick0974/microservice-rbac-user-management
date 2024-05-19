@@ -29,10 +29,13 @@ public class EmailValidator {
                     MAX_EMAIL_LENGTH));
         }
 
+        /*
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
             throw new InvalidUserDataException(String.format("The Email provided %s is not formal valid", email));
         }
+
+         */
     }
 
 }

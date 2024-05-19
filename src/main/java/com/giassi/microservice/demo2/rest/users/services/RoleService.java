@@ -59,7 +59,7 @@ public class RoleService {
         role.setRole(roleStr);
 
         role = roleRepository.save(role);
-        log.info(String.format("Role %s %s has been created.", role.getId(), role.getRole()));
+        log.info(String.format("Role %s %s has been created.", role.getRoleId(), role.getRole()));
 
         return role;
     }
@@ -79,7 +79,7 @@ public class RoleService {
         Long countUsages = roleRepository.countRoleUsage(id);
         if (countUsages > 0) {
             String errMsg = String.format("The role %s %s is in use (%s users_roles configuration rows)" +
-                            " and cannot be deleted", role.getId(), role.getRole(), countUsages);
+                            " and cannot be deleted", role.getRoleId(), role.getRole(), countUsages);
             log.error(errMsg);
             throw new RoleInUseException(errMsg);
         }
@@ -110,14 +110,14 @@ public class RoleService {
         // check if exists the permission key
         Permission permission;
 
-        Optional<Permission> permissionOpt = permissionRepository.findByPermission(permissionKey);
+        Optional<Permission> permissionOpt = permissionRepository.findByPermissionKey(permissionKey);
         if (permissionOpt.isPresent()) {
             // the permission exists
             permission = permissionOpt.get();
         } else {
             // if the permission doesn't exists: create one
             permission = new Permission();
-            permission.setPermission(permissionKey);
+            permission.setPermissionKey(permissionKey);
 
             permission = permissionRepository.save(permission);
         }
@@ -125,7 +125,7 @@ public class RoleService {
         // check if this role contains already the given permission
         if (role.getPermissions().contains(permission)) {
             throw new InvalidPermissionDataException(String.format("The permission %s has been already" +
-                            " associated on the role %s", permission.getPermission(), role.getRole() ));
+                            " associated on the role %s", permission.getPermissionKey(), role.getRole() ));
         }
 
         role.getPermissions().add(permission);
@@ -147,7 +147,7 @@ public class RoleService {
         Role role = roleOpt.get();
 
         // check permission
-        Optional<Permission> permissionOpt = permissionRepository.findByPermission(permissionKey);
+        Optional<Permission> permissionOpt = permissionRepository.findByPermissionKey(permissionKey);
         if (!permissionOpt.isPresent()) {
             throw new PermissionNotFoundException(String.format("Permission not found with Id = %s on role %s",
                     permissionKey, roleId));

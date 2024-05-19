@@ -33,7 +33,7 @@ public class LoginRestControllerIntegrationTest {
         UserDTO userDTO = response.getBody();
         assertNotNull(userDTO);
 
-        assertThat(userDTO.getId(), equalTo(1L));
+        assertThat(userDTO.getUserId(), equalTo(1L));
         assertThat(userDTO.getName(), equalTo("Andrea"));
         assertThat(userDTO.getSurname(), equalTo("Test"));
 

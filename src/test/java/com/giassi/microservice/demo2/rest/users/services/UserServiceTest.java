@@ -70,7 +70,7 @@ public class UserServiceTest {
         // take the second element to test the DTO content
         UserDTO userDTO = userDTOList.get(1);
 
-        assertEquals(Long.valueOf(2L) , userDTO.getId());
+        assertEquals(Long.valueOf(2L) , userDTO.getUserId());
         assertEquals("marco" , userDTO.getUsername());
         assertEquals("Marco" , userDTO.getName());
         assertEquals("Rossi" , userDTO.getSurname());
@@ -92,7 +92,7 @@ public class UserServiceTest {
         User userRet = userService.getUserById(userId);
 
         assertNotNull(userRet);
-        assertEquals(userId, userRet.getId());
+        assertEquals(userId, userRet.getUserId());
         assertEquals("andrea", userRet.getUsername());
         assertEquals("Andrea", userRet.getName());
         assertEquals("Giassi", userRet.getSurname());
@@ -129,7 +129,7 @@ public class UserServiceTest {
         User user = userService.getUserByUsername("andrea");
 
         assertNotNull(user);
-        assertEquals(Long.valueOf(1L), user.getId());
+        assertEquals(Long.valueOf(1L), user.getUserId());
         assertEquals("andrea", user.getUsername());
         assertEquals("Andrea", user.getName());
         assertEquals("Giassi", user.getSurname());
@@ -147,7 +147,7 @@ public class UserServiceTest {
         User user = userService.getUserByEmail("andrea.test@gmail.com");
 
         assertNotNull(user);
-        assertEquals(Long.valueOf(1L), user.getId());
+        assertEquals(Long.valueOf(1L), user.getUserId());
         assertEquals("andrea", user.getUsername());
         assertEquals("Andrea", user.getName());
         assertEquals("Giassi", user.getSurname());

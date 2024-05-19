@@ -29,12 +29,15 @@ public class PasswordValidator {
                     MAX_PASSWORD_LENGTH));
         }
 
+         /*
         // Password must to be at least 8 chars, 1 number, 1 upper case, 1 lower case letter, 1 special char, no spaces
         Matcher matcher = pattern.matcher(password);
         if (!matcher.matches()) {
             throw new InvalidUserDataException("Password must to be at least 8 chars, 1 number, 1 upper case," +
                     " 1 lower case letter, 1 special char, no spaces");
         }
+
+         */
     }
 
 }

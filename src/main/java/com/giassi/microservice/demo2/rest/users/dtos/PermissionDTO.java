@@ -15,7 +15,7 @@ public class PermissionDTO implements java.io.Serializable {
 
     public PermissionDTO(Permission permission) {
         this.id = permission.getId();
-        this.permission = permission.getPermission();
+        this.permission = permission.getPermissionKey();
         this.enabled = permission.isEnabled();
         this.note = permission.getNote();
     }

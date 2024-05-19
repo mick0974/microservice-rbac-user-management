@@ -29,7 +29,7 @@ public class PermissionService {
         if (Strings.isNullOrEmpty(key)) {
             throw new InvalidPermissionDataException("Permission key cannot be null or empty");
         }
-        Optional<Permission> userOpt = permissionRepository.findByPermission(key);
+        Optional<Permission> userOpt = permissionRepository.findByPermissionKey(key);
         if (userOpt.isPresent()) {
             return userOpt.get();
         }
@@ -49,14 +49,14 @@ public class PermissionService {
         }
 
         // check permission
-        Optional<Permission> permissionOpt = permissionRepository.findByPermission(permissionKey);
+        Optional<Permission> permissionOpt = permissionRepository.findByPermissionKey(permissionKey);
         if (permissionOpt.isPresent()) {
             throw new PermissionNotFoundException(String.format("Permission %s already existing with the same key with Id = %s",
                     permissionKey, permissionOpt.get().getId()));
         }
 
         Permission permission = new Permission();
-        permission.setPermission(permissionKey);
+        permission.setPermissionKey(permissionKey);
 
         permission.setNote(permissionDTO.getNote());
         permission.setEnabled(permissionDTO.isEnabled());
@@ -84,7 +84,7 @@ public class PermissionService {
         String permissionKey = permissionDTO.getPermission();
 
         // check if exists a different configuration with the same permissionKey
-        Optional<Permission> permissionByKeyOpt = permissionRepository.findByPermission(permissionKey);
+        Optional<Permission> permissionByKeyOpt = permissionRepository.findByPermissionKey(permissionKey);
         if (permissionByKeyOpt.isPresent()) {
             Permission permission1 = permissionByKeyOpt.get();
             if (!permission1.getId().equals(permission.getId())) {
@@ -94,7 +94,7 @@ public class PermissionService {
         }
 
         // update permission
-        permission.setPermission(permissionDTO.getPermission());
+        permission.setPermissionKey(permissionDTO.getPermission());
         permission.setEnabled(permissionDTO.isEnabled());
         permission.setNote(permissionDTO.getNote());
 
@@ -111,7 +111,7 @@ public class PermissionService {
         }
 
         // check permission
-        Optional<Permission> permissionOpt = permissionRepository.findByPermission(permissionKey);
+        Optional<Permission> permissionOpt = permissionRepository.findByPermissionKey(permissionKey);
         if (!permissionOpt.isPresent()) {
             throw new PermissionNotFoundException(String.format("Permission %s not found", permissionKey));
         }
@@ -128,7 +128,7 @@ public class PermissionService {
 
         permissionRepository.delete(permission);
 
-        log.info(String.format("Deleted permission with key %s", permission.getPermission()));
+        log.info(String.format("Deleted permission with key %s", permission.getPermissionKey()));
     }
 
 }

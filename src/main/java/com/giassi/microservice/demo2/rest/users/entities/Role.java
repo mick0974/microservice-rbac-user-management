@@ -21,13 +21,13 @@ public class Role {
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name="id")
-    private Long id;
+    private Long roleId;
 
     @Column(name="role", nullable = false)
     private String role;
 
-    public Role(Long id, String role) {
-        this.id = id;
+    public Role(Long roleId, String role) {
+        this.roleId = roleId;
         this.role = role;
     }
 
@@ -41,7 +41,7 @@ public class Role {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Role )) return false;
-        return id != null && id.equals(((Role) o).getId());
+        return roleId != null && roleId.equals(((Role) o).getRoleId());
     }
 
     @Override

@@ -23,7 +23,7 @@ public class PermissionDTOTest {
         PermissionDTO permissionDTO = new PermissionDTO(permission);
 
         assertEquals(permission.getId(), permissionDTO.getId());
-        assertEquals(permission.getPermission(), permissionDTO.getPermission());
+        assertEquals(permission.getPermissionKey(), permissionDTO.getPermission());
         assertTrue(permissionDTO.isEnabled());
     }
 

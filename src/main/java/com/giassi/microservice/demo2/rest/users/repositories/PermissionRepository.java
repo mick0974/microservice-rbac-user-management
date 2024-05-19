@@ -10,11 +10,11 @@ import java.util.Optional;
 @Repository
 public interface PermissionRepository extends CrudRepository<Permission, Long> {
 
-    Optional<Permission> findByPermission(String permission);
+    Optional<Permission> findByPermissionKey(String permission);
 
     @Query(value = "select count(*) from permissions_roles where permission_id = ?1", nativeQuery = true)
     Long countPermissionUsage(Long permissionId);
 
-    void deleteByPermission(String permission);
+    void deleteByPermissionKey(String permission);
 
 }

@@ -55,7 +55,7 @@ public class RoleServiceTest {
         Role returnRole = roleService.getRoleById(roleId);
 
         assertNotNull(returnRole);
-        assertEquals(role.getId(), returnRole.getId());
+        assertEquals(role.getRoleId(), returnRole.getRoleId());
     }
 
     // validateRoleName
@@ -100,7 +100,7 @@ public class RoleServiceTest {
         Role role = roleService.createRole("TEST");
 
         assertNotNull(role);
-        assertEquals(genId, role.getId());
+        assertEquals(genId, role.getRoleId());
         assertEquals("TEST", role.getRole());
     }
 
@@ -160,7 +160,7 @@ public class RoleServiceTest {
 
         assertNotNull(roleUpdated);
         // role data
-        assertEquals(Long.valueOf(1L), roleUpdated.getId());
+        assertEquals(Long.valueOf(1L), roleUpdated.getRoleId());
         assertEquals("TEST", roleUpdated.getRole());
 
         // permissions
@@ -174,15 +174,15 @@ public class RoleServiceTest {
 
         Permission permission = new Permission();
         permission.setId(1L);
-        permission.setPermission("PERMISSION_ONE");
+        permission.setPermissionKey("PERMISSION_ONE");
 
-        given(permissionRepository.findByPermission("PERMISSION_ONE")).willReturn(Optional.of(permission));
+        given(permissionRepository.findByPermissionKey("PERMISSION_ONE")).willReturn(Optional.of(permission));
 
         Role roleUpdated = roleService.addPermissionOnRole(1L, "PERMISSION_ONE");
 
         assertNotNull(roleUpdated);
         // role data
-        assertEquals(Long.valueOf(1L), roleUpdated.getId());
+        assertEquals(Long.valueOf(1L), roleUpdated.getRoleId());
         assertEquals("TEST", roleUpdated.getRole());
 
         // permissions
@@ -198,13 +198,13 @@ public class RoleServiceTest {
 
         Permission permission = new Permission(1L, "PERMISSION_ONE");
 
-        given(permissionRepository.findByPermission("PERMISSION_ONE")).willReturn(Optional.of(permission));
+        given(permissionRepository.findByPermissionKey("PERMISSION_ONE")).willReturn(Optional.of(permission));
 
         Role roleUpdated = roleService.addPermissionOnRole(1L, "PERMISSION_ONE");
 
         assertNotNull(roleUpdated);
         // role data
-        assertEquals(Long.valueOf(1L), roleUpdated.getId());
+        assertEquals(Long.valueOf(1L), roleUpdated.getRoleId());
         assertEquals("TEST", roleUpdated.getRole());
 
         // permissions
@@ -238,15 +238,15 @@ public class RoleServiceTest {
 
         Permission permission = new Permission();
         permission.setId(1L);
-        permission.setPermission("PERMISSION");
+        permission.setPermissionKey("PERMISSION");
 
-        given(permissionRepository.findByPermission("PERMISSION")).willReturn(Optional.of(permission));
+        given(permissionRepository.findByPermissionKey("PERMISSION")).willReturn(Optional.of(permission));
 
         Role roleUpdated = roleService.removePermissionOnRole(1L, "PERMISSION");
 
         assertNotNull(roleUpdated);
         // role data
-        assertEquals(Long.valueOf(1L), roleUpdated.getId());
+        assertEquals(Long.valueOf(1L), roleUpdated.getRoleId());
         assertEquals("TEST", roleUpdated.getRole());
 
         // permissions
@@ -260,15 +260,15 @@ public class RoleServiceTest {
 
         Permission permission = new Permission();
         permission.setId(1L);
-        permission.setPermission("PERMISSION");
+        permission.setPermissionKey("PERMISSION");
 
-        given(permissionRepository.findByPermission("PERMISSION")).willReturn(Optional.of(permission));
+        given(permissionRepository.findByPermissionKey("PERMISSION")).willReturn(Optional.of(permission));
 
         Role roleUpdated = roleService.removePermissionOnRole(1L, "PERMISSION");
 
         assertNotNull(roleUpdated);
         // role data
-        assertEquals(Long.valueOf(1L), roleUpdated.getId());
+        assertEquals(Long.valueOf(1L), roleUpdated.getRoleId());
         assertEquals("TEST", roleUpdated.getRole());
 
         // permissions

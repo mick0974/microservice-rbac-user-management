@@ -21,7 +21,7 @@ public class UserDTO implements Serializable {
 
     public UserDTO(User user) {
         if (user != null) {
-            this.id = user.getId();
+            this.userId = user.getUserId();
             this.username = user.getUsername();
             this.name = user.getName();
             this.surname = user.getSurname();
@@ -57,7 +57,7 @@ public class UserDTO implements Serializable {
             for (Role role : user.getRoles()) {
                 roles.add(role.getRole());
                 for (Permission p : role.getPermissions()) {
-                    String key = p.getPermission();
+                    String key = p.getPermissionKey();
                     if ((!permissions.contains(key)) && (p.isEnabled())) {
                         // add the permission only if enabled
                         permissions.add(key);
@@ -68,7 +68,7 @@ public class UserDTO implements Serializable {
         }
     }
 
-    private Long id;
+    private Long userId;
     private String username;
     private String name;
     private String surname;

@@ -53,7 +53,7 @@ public class UserRestControllerTest {
         UserDTO userDTO = response.getBody();
         assertNotNull(userDTO);
 
-        assertThat(userDTO.getId(), equalTo(1L));
+        assertThat(userDTO.getUserId(), equalTo(1L));
         assertThat(userDTO.getName(), equalTo("Andrea"));
         assertThat(userDTO.getSurname(), equalTo("Test"));
         assertThat(userDTO.getContactDTO().getEmail(), equalTo("andrea.test@gmail.com"));
@@ -121,7 +121,7 @@ public class UserRestControllerTest {
         assertEquals("47335", addressDTO.getZipCode());
 
         // delete the created user
-        userService.deleteUserById(userDTO.getId());
+        userService.deleteUserById(userDTO.getUserId());
     }
 
     @Test
@@ -146,7 +146,7 @@ public class UserRestControllerTest {
         assertNotNull(userDTO);
 
         // test the update
-        Long userId = userDTO.getId();
+        Long userId = userDTO.getUserId();
         URI uri = URI.create("/users/" + userId);
 
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
@@ -206,7 +206,7 @@ public class UserRestControllerTest {
         assertEquals("47335", userUpdatedDTO.getAddressDTO().getZipCode());
 
         // delete the user
-        userService.deleteUserById(userUpdatedDTO.getId());
+        userService.deleteUserById(userUpdatedDTO.getUserId());
     }
 
     @Test
@@ -231,11 +231,11 @@ public class UserRestControllerTest {
         assertNotNull(userDTO);
 
         // call the delete endpoint
-        String deleteUserURL = "/users/" + userDTO.getId();
+        String deleteUserURL = "/users/" + userDTO.getUserId();
         restTemplate.delete(deleteUserURL);
 
         // retrieve a not existing user must to be empty response
-        Optional<User> userOpt = userRepository.findById(userDTO.getId());
+        Optional<User> userOpt = userRepository.findById(userDTO.getUserId());
         assertFalse(userOpt.isPresent());
     }
 
@@ -262,7 +262,7 @@ public class UserRestControllerTest {
         assertNotNull(userDTO);
 
         // test the add role
-        Long userId = userDTO.getId();
+        Long userId = userDTO.getUserId();
         URI uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
         ResponseEntity<UserDTO> response = restTemplate.exchange(uri, HttpMethod.POST, null, UserDTO.class);
 
@@ -283,7 +283,7 @@ public class UserRestControllerTest {
         assertTrue(addedRoleOnUserDTO.getRoles().contains("ADMINISTRATOR"));
 
         // delete the user
-        userService.deleteUserById(addedRoleOnUserDTO.getId());
+        userService.deleteUserById(addedRoleOnUserDTO.getUserId());
     }
 
     @Test
@@ -327,7 +327,7 @@ public class UserRestControllerTest {
         assertNotNull(userDTO);
 
         // test the add role
-        Long userId = userDTO.getId();
+        Long userId = userDTO.getUserId();
         URI uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
         ResponseEntity<UserDTO> response = restTemplate.exchange(uri, HttpMethod.POST, null, UserDTO.class);
 
@@ -355,7 +355,7 @@ public class UserRestControllerTest {
         assertTrue(removedRoleOnUserDTO.getRoles().contains("USER"));
 
         // delete the user
-        userService.deleteUserById(removedRoleOnUserDTO.getId());
+        userService.deleteUserById(removedRoleOnUserDTO.getUserId());
     }
 
     @Test
@@ -399,11 +399,11 @@ public class UserRestControllerTest {
         assertNotNull(userDTO);
 
         // call the delete endpoint
-        String deleteUserURL = "/users/" + userDTO.getId();
+        String deleteUserURL = "/users/" + userDTO.getUserId();
         restTemplate.delete(deleteUserURL);
 
         // retrieve a not existing user must to be empty response
-        Optional<User> userOpt = userRepository.findById(userDTO.getId());
+        Optional<User> userOpt = userRepository.findById(userDTO.getUserId());
         assertFalse(userOpt.isPresent());
     }
 
